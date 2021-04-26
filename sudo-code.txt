@@ -1,0 +1,28 @@
+Sudo-code:
+G(Vertex v, Equation e){
+	if(e does not contain letters){ return e }
+	
+	//Left:
+	if(highest letter == letter + "'")
+		Replace with 1 and save to E1
+	else
+		Replace with 0 and save to E1
+		
+	ans1 = G(v->left_child, E1);
+		
+	//Right:
+	if(highest letter = letter + "'")
+		Replace with 0 and save to E2
+	else
+		Replace with 1 and save to E2
+	
+	ans2 = G(v->right_child, E2);
+		
+	//Check similarity:
+	if(ans1 == ans2)
+		check if cousin nodes are the same
+		simplify tree
+		return str(ans1)
+	else
+		return str(ans1 + "+" + ans2)
+}
