@@ -32,7 +32,7 @@ def GenILP(a, l, dfgIn):
 				
 	maxCycles = max(numCycles)
 	maxIdx = numCycles.index(maxCycles) # Rigid path, doesn't include repeats
-
+		
 	critPaths = []
 	i=0
 	for c in numCycles:
@@ -42,10 +42,26 @@ def GenILP(a, l, dfgIn):
  	
  	# Get Constraint Criteria
 	cDict = CalculateConstraintCriteria(nodePaths, nodePathInfo, maxCycles, maxIdx, critPaths)
+
+ 	# Check Feasibility
+	# Pull out all nodes with parent == -1
+	feasible = []
+	for i in cDict:
+		p = SearchListOfList(i["parents"], 0, -1)
+		if(p > -1):
+			if(len(i["cycles"]) > 1):
+				feasible.append("maybe")
+			if(len(i["cycles"]) == 1):
+				feasible.append("yes") # this line is probably part of the critical path
+
+	if("yes" not in feasible):
+		print("No Feasible Solution")
+		exit()
 	
 	#get Execution Constraints and constraint node names
 	[ec, cn] = CalcExecutionConstraints(cDict)
-
+	#for i in ec: print(i)
+		
 	# Get Dependency Constraints
 	dc = CalcDependencyConstraints(cDict)
 	
