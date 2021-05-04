@@ -1,0 +1,3 @@
+glpqmd.lo: glpqmd.c ../include/glpqmd.h
+
+../include/glpqmd.h:

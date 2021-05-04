@@ -1,0 +1,3 @@
+glpnet02.lo: glpnet02.c ../include/glpnet.h
+
+../include/glpnet.h:
